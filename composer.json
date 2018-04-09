@@ -1,0 +1,11 @@
+{
+	"require" : {
+		"slim/slim" : "~3.9",
+		"slim/logger" : "~0.1"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"app\\" : "src/app/"
+		}
+	}
+}
