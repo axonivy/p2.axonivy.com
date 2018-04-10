@@ -2,8 +2,11 @@
 
 ## Setup
 	docker-compose up
-	docker exec -i -t file-axonivy-works-web /bin/bash
-	composer install
+	docker-compose exec web composer install
+	
+	
+## After changing DockerFile
+	docker-compose build
 
 ## Ressources
 * SlimFramework <http://www.slimframework.com>
