@@ -25,7 +25,7 @@ pipeline {
       	sh './vendor/bin/phpunit --log-junit phpunit-junit.xml'
       }
       post {
-        success {
+        always {
           junit 'phpunit-junit.xml' 
         }
       }
