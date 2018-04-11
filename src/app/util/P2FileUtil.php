@@ -9,9 +9,8 @@ class P2FileUtil
 
     public static function getRootFolder($request, $response, string $version): string
     {
-        // TODO maybe change root directory
-        $rootFolder = __DIR__ . DS . '..' . DS . '..' . DS . '..' . DS . 'data' . DS . $version;
-        echo $rootFolder;
+        // TODO maybe change root directory        
+        $rootFolder = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'data', $version]);
         
         if (! Str::isStart($rootFolder, __DIR__)) {
             throw new NotFoundException($request, $response);
