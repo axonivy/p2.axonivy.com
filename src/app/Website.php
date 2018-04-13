@@ -38,8 +38,8 @@ class Website
 
     private static function registerRoutes(App $app)
     {
-        $app->get('/{version}/p2.index', P2IndexAction::class);
-        $app->get('/{version}/compositeArtifacts.xml', CompositeXmlAction::class);
-        $app->get('/{version}/compositeContent.xml', CompositeXmlAction::class);
+        $app->get('/p2/{version}/p2.index', P2IndexAction::class);
+        $app->get('/p2/{version}/compositeArtifacts.xml', CompositeXmlAction::class);
+        $app->get('/p2/{version}/compositeContent.xml', CompositeXmlAction::class);
     }
 }

@@ -30,7 +30,7 @@ class P2FileUtil
         });
         
         $timestamps = array_map(function ($filename) {
-            return filemtime($filename) * 1000;
+            return filemtime($filename . DIRECTORY_SEPARATOR . 'p2.complete') * 1000;
         }, $directories);
         
         $timestamp = empty($timestamps) ? 0 : max($timestamps);
