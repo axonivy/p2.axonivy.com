@@ -17,7 +17,8 @@ class P2IndexAction
     public function __invoke(Request $request, $response, $args)
     {
         $version = $args['version'];
-        $rootFolder = P2FileUtil::getRootFolder($request, $response, $version);
+        $p2DataPath = $this->container->get('settings')['p2DataPath'];
+        $rootFolder = P2FileUtil::getRootFolder($request, $response, $p2DataPath, $version);
         
         return $this->container->get('view')
             ->render($response, 'p2.index')

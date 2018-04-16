@@ -7,12 +7,11 @@ use Slim\Exception\NotFoundException;
 class P2FileUtil
 {
 
-    public static function getRootFolder($request, $response, string $version): string
+    public static function getRootFolder($request, $response, string $p2DataPath, string $version): string
     {
-        // TODO maybe change root directory        
-        $rootFolder = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'data', $version]);
+        $rootFolder = $p2DataPath . DIRECTORY_SEPARATOR . $version;
         
-        if (! Str::isStart($rootFolder, __DIR__)) {
+        if (! Str::isStart($rootFolder, $p2DataPath)) {
             throw new NotFoundException($request, $response);
         }
         if (! file_exists($rootFolder)) {
@@ -39,10 +38,26 @@ class P2FileUtil
             return basename($pathName);
         }, $directories);
         
+        $additionalLocationsPath = $rootFolder . '_additional-locations.txt';
+        if (file_exists($additionalLocationsPath)) {
+            self::appendLines($locations, $additionalLocationsPath);
+        }
+        
         return new Composite($locations, $timestamp);
     }
 
-    public static function getP2Timestamp(string $filename) : string
+    private static function appendLines(array &$appendTo, string $filePath)
+    {
+        if ($file = fopen($filePath, "r")) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                array_push($appendTo, $line);
+            }
+            fclose($file);
+        }
+    }
+
+    public static function getP2Timestamp(string $filename): string
     {
         $xml = simplexml_load_file($filename);
         return $xml->xpath("/repository/properties/property[@name='p2.timestamp']/@value")[0];

@@ -41,7 +41,7 @@ class AppTester
 
     private static function get(string $url): Response
     {
-        $app = Website::createApp('src/templates');
+        $app = Website::createApp('test/p2-data');
         $environment = Environment::mock([
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => $url
