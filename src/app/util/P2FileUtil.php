@@ -30,7 +30,7 @@ class P2FileUtil
         });
         
         $timestamps = array_map(function ($filename) {
-            return filemtime($filename . DIRECTORY_SEPARATOR . 'p2.complete') * 1000;
+            return self::getP2Timestamp($filename . DIRECTORY_SEPARATOR . 'artifacts.xml');
         }, $directories);
         
         $timestamp = empty($timestamps) ? 0 : max($timestamps);
@@ -40,6 +40,12 @@ class P2FileUtil
         }, $directories);
         
         return new Composite($locations, $timestamp);
+    }
+
+    public static function getP2Timestamp(string $filename) : string
+    {
+        $xml = simplexml_load_file($filename);
+        return $xml->xpath("/repository/properties/property[@name='p2.timestamp']/@value")[0];
     }
 }
 

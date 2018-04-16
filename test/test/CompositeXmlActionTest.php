@@ -18,7 +18,7 @@ class CompositeXmlActionTest extends TestCase
         AppTester::assertThatGet('/p2/8.0/compositeArtifacts.xml')->statusCode(200)
             ->contentType('text/xml')
             ->bodyContains('8.0.0-201706120950')
-            ->bodyContains("'p2.timestamp' value='1523435607000'")
+            ->bodyContains("'p2.timestamp' value='1518020687970'")
             ->bodyContains("<?compositeArtifactRepository version='1.0.0'?>")
             ->bodyContains("<repository name='The Axon.ivy repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
     }
@@ -29,7 +29,7 @@ class CompositeXmlActionTest extends TestCase
             ->contentType('text/xml')
             ->bodyContains('7.1.0-201706120950')
             ->bodyContains('7.2.0-201706120950')
-            ->bodyContains("'p2.timestamp' value='1523435607000'");
+            ->bodyContains("'p2.timestamp' value='1518020687960'");
     }
 
     public function test_compositeContent()
@@ -37,7 +37,7 @@ class CompositeXmlActionTest extends TestCase
         AppTester::assertThatGet('/p2/8.0/compositeContent.xml')->statusCode(200)
             ->contentType('text/xml')
             ->bodyContains('8.0.0-201706120950')
-            ->bodyContains("'p2.timestamp' value='1523435607000'")
+            ->bodyContains("'p2.timestamp' value='1518020687970'")
             ->bodyContains("<?compositeMetadataRepository version='1.0.0'?>")
             ->bodyContains("<repository name='The Axon.ivy repository' type='org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository' version='1.0.0'>");
     }
