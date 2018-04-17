@@ -1,2 +1,7 @@
 # Comment
 ../features/birt-project-reporting/nightly
+
+# Add eclipse update site
+http://download.eclipse.org/eclipse/updates/4.7/
+
+

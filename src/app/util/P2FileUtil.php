@@ -51,8 +51,8 @@ class P2FileUtil
     {
         if ($file = fopen($filePath, "r")) {
             while (! feof($file)) {
-                $line = fgets($file);
-                if (! Str::isStart($line, '#')) {
+                $line = Str::trim(fgets($file));
+                if (! Str::isStart($line, '#') && ! empty($line)) {
                     array_push($appendTo, $line);
                 }
             }
