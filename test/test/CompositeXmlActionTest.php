@@ -20,7 +20,7 @@ class CompositeXmlActionTest extends TestCase
             ->bodyContains('8.0.0-201706120950')
             ->bodyContains("'p2.timestamp' value='1518020687970'")
             ->bodyContains("<?compositeArtifactRepository version='1.0.0'?>")
-            ->bodyContains("<repository name='The Axon.ivy repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
+            ->bodyContains("<repository name='Axon.ivy 8.0 repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
     }
 
     public function test_LE_compositeArtifacts()
@@ -41,7 +41,7 @@ class CompositeXmlActionTest extends TestCase
         ->bodyContains("../features/birt-project-reporting/nightly")
         ->bodyContains("http://download.eclipse.org/eclipse/updates/4.7/")
         ->bodyContains("<?compositeArtifactRepository version='1.0.0'?>")
-        ->bodyContains("<repository name='The Axon.ivy repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
+        ->bodyContains("<repository name='Axon.ivy nightly repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
     }
 
     public function test_compositeContent()
@@ -51,7 +51,7 @@ class CompositeXmlActionTest extends TestCase
             ->bodyContains('8.0.0-201706120950')
             ->bodyContains("'p2.timestamp' value='1518020687970'")
             ->bodyContains("<?compositeMetadataRepository version='1.0.0'?>")
-            ->bodyContains("<repository name='The Axon.ivy repository' type='org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository' version='1.0.0'>");
+            ->bodyContains("<repository name='Axon.ivy 8.0 repository' type='org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository' version='1.0.0'>");
     }
 
     public function test_404()
