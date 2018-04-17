@@ -52,7 +52,7 @@ pipeline {
             
             // create symlinks
             sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 ln -fns /home/axonivy1/deployment/$targetFile/src/web /home/axonivy1/www/file.axonivy.rocks/linktoweb"
-            sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 ln -fns /home/axonivy1/data/p2-core /home/axonivy1/deployment/$targetFile/src/web/p2"
+            sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 ln -fns /home/axonivy1/data/p2 /home/axonivy1/deployment/$targetFile/src/web/p2"
           }
         }
       }

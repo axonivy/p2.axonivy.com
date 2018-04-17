@@ -28,12 +28,6 @@ class P2FileUtil
             return file_exists($pathName . DIRECTORY_SEPARATOR . 'p2.complete');
         });
         
-        $timestamps = array_map(function ($filename) {
-            return self::getP2Timestamp($filename . DIRECTORY_SEPARATOR . 'artifacts.xml');
-        }, $directories);
-        
-        $timestamp = empty($timestamps) ? 0 : max($timestamps);
-        
         $locations = array_map(function ($pathName) {
             return basename($pathName);
         }, $directories);
@@ -43,15 +37,24 @@ class P2FileUtil
             self::appendLines($locations, $additionalLocationsPath);
         }
         
+        $timestamps = array_map(function ($filename) use ($rootFolder) {
+            $filepath = $rootFolder . DIRECTORY_SEPARATOR . $filename . DIRECTORY_SEPARATOR . 'artifacts.xml';
+            return file_exists($filepath) ? self::getP2Timestamp($filepath) : 0;
+        }, $locations);
+        
+        $timestamp = empty($timestamps) ? 0 : max($timestamps);
+        
         return new Composite($locations, $timestamp);
     }
 
     private static function appendLines(array &$appendTo, string $filePath)
     {
         if ($file = fopen($filePath, "r")) {
-            while(!feof($file)) {
+            while (! feof($file)) {
                 $line = fgets($file);
-                array_push($appendTo, $line);
+                if (! Str::isStart($line, '#')) {
+                    array_push($appendTo, $line);
+                }
             }
             fclose($file);
         }

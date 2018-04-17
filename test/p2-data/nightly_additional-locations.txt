@@ -1,1 +1,2 @@
-../../data/p2-birt-project-reporting/nightly
+# Comment
+../features/birt-project-reporting/nightly

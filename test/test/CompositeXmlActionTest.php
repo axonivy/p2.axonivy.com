@@ -36,7 +36,8 @@ class CompositeXmlActionTest extends TestCase
     {
         AppTester::assertThatGet('/p2/nightly/compositeArtifacts.xml')->statusCode(200)
         ->contentType('text/xml')
-        ->bodyContains('../../data/p2-birt-project-reporting/nightly')
+        ->bodyContains("'p2.timestamp' value='1618020687959'")
+        ->bodyContains('../features/birt-project-reporting/nightly')
         ->bodyContains("<?compositeArtifactRepository version='1.0.0'?>")
         ->bodyContains("<repository name='The Axon.ivy repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
     }
