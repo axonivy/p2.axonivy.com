@@ -23,8 +23,9 @@ class CompositeXmlAction
         $fileName = basename($request->getUri()->getPath());
         
         return $this->container->get('view')
-            ->render($response, $fileName, [
-            'composite' => $composite
+        ->render($response, $fileName, [
+            'composite' => $composite,
+            'version' => $version
         ])
             ->withHeader('Content-Type', 'text/xml');
     }
