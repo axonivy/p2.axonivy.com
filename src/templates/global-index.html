@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-rfPl7UHwaHyXh/n5kFubgXzPE1QcgUOk9qyasE7bw4YTXgJ7A5Y/ljxbuNFETD7L" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="shortcut icon" href="/resources/images/ivy_favicon_48.png">
+
+    <title>Axon.ivy Update Sites</title>
+  </head>
+  <body style="padding-top: 5.5rem;">
+
+  	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  		<a class="navbar-brand" href="/p2"><i class="fa fa-download"></i> Axon.ivy Updates</a>
+  	</nav>
+
+    <main role="main">
+
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Axon.ivy P2 Update Sites</h1>
+          <p>Use one of the following Update Site to update or install additional features.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2><a href="LE">Leading Edge</a> <span class="badge badge-success">Stable</span></h2>
+            <p>During the year we deliver a few Leading Edge releases. A Leading Edge release is based on the latest stable LTS release and contains new major features. In contrast to the LTS version, only the latest Leading Edge release is supported.
+            An Leading Edge release allows to use latest features as soon as they are in a productive state. The next LTS version will be based on the latest Leading Edge version. </p>
+
+          </div>
+          <div class="col-md-4">
+            <h2><a href="sprint">Sprint Release</a> <span class="badge badge-warning">Testing</span></h2>
+            <p>We provide previews of the next release after each sprint (every 3 weeks). Check out our <a href="http://www.ivyteam.ch/flatpress/?x=cat:1">Blog</a> to stay up to date about new previews.</p>
+            <div class="alert alert-danger">
+              <strong>Do not use in production!</strong><br /> This release is for testing purposes only.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h2><a href="nightly">Nightly Build</a> <span class="badge badge-danger">Unstable</span></h2>
+            <p>Every night we build a release which can be highly unstable!</p>
+            <div class="alert alert-danger">
+              <strong>Do not use in production!</strong><br /> This build is for testing purposes only.
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </main>
+
+    <footer class="container">
+      <p>&copy; AXON IVY {{ "now"|date("Y") }}</p>
+    </footer>
+
+  </body>
+</html>

@@ -4,7 +4,9 @@ namespace app;
 use Slim\App;
 use Slim\Views\Twig;
 use app\action\CompositeXmlAction;
+use app\action\GlobalIndexAction;
 use app\action\P2IndexAction;
+use app\action\VersionIndexAction;
 
 class Website
 {
@@ -44,6 +46,8 @@ class Website
 
     private static function registerRoutes(App $app)
     {
+        $app->get('/p2/', GlobalIndexAction::class);
+        $app->get('/p2/{version}/', VersionIndexAction::class);
         $app->get('/p2/{version}/p2.index', P2IndexAction::class);
         $app->get('/p2/{version}/compositeArtifacts.xml', CompositeXmlAction::class);
         $app->get('/p2/{version}/compositeContent.xml', CompositeXmlAction::class);
