@@ -19,10 +19,12 @@ class VersionIndexAction
         $version = $args['version'];
         $p2DataPath = $this->container->get('settings')['p2DataPath'];
         $rootFolder = P2FileUtil::getRootFolder($request, $response, $p2DataPath, $version);
+        $latestVersion = P2FileUtil::getLatestVersion($rootFolder);
         
         return $this->container->get('view')->render($response, 'version-index.html', [
             'version' => $version,
-            'currentUri' => $this->container->get('request')->getUri()
+            'currentUri' => $this->container->get('request')->getUri(),
+            'latestVersion' => $latestVersion
         ]);
     }
 }

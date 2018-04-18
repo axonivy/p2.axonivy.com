@@ -22,15 +22,7 @@ class P2FileUtil
 
     public static function getFolders($rootFolder): Composite
     {
-        $pathNames = glob($rootFolder . DIRECTORY_SEPARATOR . '*');
-        $directories = array_filter($pathNames, 'is_dir');
-        $directories = array_filter($directories, function ($pathName) {
-            return file_exists($pathName . DIRECTORY_SEPARATOR . 'p2.complete');
-        });
-        
-        $locations = array_map(function ($pathName) {
-            return basename($pathName);
-        }, $directories);
+        $locations = self::getLocations($rootFolder);
         
         $additionalLocationsPath = $rootFolder . '_additional-locations.txt';
         if (file_exists($additionalLocationsPath)) {
@@ -45,6 +37,27 @@ class P2FileUtil
         $timestamp = empty($timestamps) ? 0 : max($timestamps);
         
         return new Composite($locations, $timestamp);
+    }
+    
+    public static function getLatestVersion($rootFolder) : string
+    {
+        $locations = self::getLocations($rootFolder);
+        $latestVersion = empty($locations) ? 'None' : max($locations);
+        return $latestVersion;
+    }
+    
+    private static function getLocations($rootFolder) : array
+    {
+        $pathNames = glob($rootFolder . DIRECTORY_SEPARATOR . '*');
+        $directories = array_filter($pathNames, 'is_dir');
+        $directories = array_filter($directories, function ($pathName) {
+            return file_exists($pathName . DIRECTORY_SEPARATOR . 'p2.complete');
+        });
+            
+       $locations = array_map(function ($pathName) {
+            return basename($pathName);
+            }, $directories);
+        return $locations;
     }
 
     private static function appendLines(array &$appendTo, string $filePath)
