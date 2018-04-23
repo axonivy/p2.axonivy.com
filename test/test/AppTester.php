@@ -71,4 +71,10 @@ class AppTester
         Assert::assertEquals($expectedContentType, $this->response->getHeader('Content-Type')[0]);
         return $this;
     }
+    
+    public function lastModified(string $expectedLastModified): AppTester
+    {
+        Assert::assertEquals($expectedLastModified, $this->response->getHeader('Last-Modified')[0]);
+        return $this;
+    }
 }

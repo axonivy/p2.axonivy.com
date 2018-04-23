@@ -27,6 +27,7 @@ class CompositeXmlAction
             'composite' => $composite,
             'version' => $version
         ])
-            ->withHeader('Content-Type', 'text/xml');
+            ->withHeader('Content-Type', 'text/xml')
+            ->withHeader('Last-Modified', date ('D, d M Y H:i:s T', $composite->timestamp / 1000));
     }
 }
