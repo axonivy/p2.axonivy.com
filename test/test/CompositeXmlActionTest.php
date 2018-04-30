@@ -26,7 +26,7 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_LE_compositeArtifacts()
     {
-        AppTester::assertThatGet('/p2/LE/compositeArtifacts.xml')->statusCode(200)
+        AppTester::assertThatGet('/p2/leading/compositeArtifacts.xml')->statusCode(200)
             ->contentType('text/xml')
             ->lastModified('Wed, 07 Feb 2018 16:24:47 UTC')
             ->bodyContains('7.1.0-201706120950')

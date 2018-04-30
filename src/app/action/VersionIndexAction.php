@@ -33,7 +33,7 @@ class VersionIndexAction
     private function versionString($version) : string
     {
         switch ($version) {
-            case 'LE':
+            case 'leading':
                 return 'Leading Edge';
             case 'sprint':
                 return 'Sprint Release';
