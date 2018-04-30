@@ -2,6 +2,7 @@
 namespace app\util;
 
 use JBZoo\Utils\Str;
+use PhpZip\ZipFile;
 use Slim\Exception\NotFoundException;
 
 class P2FileUtil
@@ -30,8 +31,8 @@ class P2FileUtil
         }
         
         $timestamps = array_map(function ($filename) use ($rootFolder) {
-            $filepath = $rootFolder . DIRECTORY_SEPARATOR . $filename . DIRECTORY_SEPARATOR . 'artifacts.xml';
-            return file_exists($filepath) ? self::getP2Timestamp($filepath) : 0;
+            $p2Folder = $rootFolder . DIRECTORY_SEPARATOR . $filename;
+            return self::getP2Timestamp($p2Folder);
         }, $locations);
         
         $timestamp = empty($timestamps) ? 0 : max($timestamps);
@@ -72,8 +73,33 @@ class P2FileUtil
             fclose($file);
         }
     }
+    
+    public static function getP2Timestamp(string $p2Folder): string
+    {
+        $artifactsXml = $p2Folder . DIRECTORY_SEPARATOR . 'artifacts.xml';
+        if (file_exists($artifactsXml))
+        {
+            return self::getP2TimestampFromXml($artifactsXml);
+        }
+        
+        $artifactsJar = $p2Folder . DIRECTORY_SEPARATOR . 'artifacts.jar';
+        if (file_exists($artifactsJar))
+        {
+            self::unzip($artifactsJar, $p2Folder);
+            return self::getP2TimestampFromXml($artifactsXml);
+        }
+        return 0;
+    }
+    
+    public static function unzip(string $zipFilename, string $extractToFolder)
+    {
+        $zipFile = new ZipFile();
+        $zipFile->openFile($zipFilename);
+        $zipFile->extractTo($extractToFolder);
+        $zipFile->close();
+    }
 
-    public static function getP2Timestamp(string $filename): string
+    public static function getP2TimestampFromXml(string $filename): string
     {
         $xml = simplexml_load_file($filename);
         return $xml->xpath("/repository/properties/property[@name='p2.timestamp']/@value")[0];
