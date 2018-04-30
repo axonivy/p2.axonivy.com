@@ -4,6 +4,27 @@ Order allow,deny
 
 Allow from all
 
+# Cache-Control = 3 Tage
+<FilesMatch "\.(css|jpg|jpeg|png|gif|js|ico|jar)$">
+Header set Cache-Control "max-age=259200, public"
+</FilesMatch>
+
+# Cache-Control = 1 Hour
+<FilesMatch "(artifacts|content).(xml|jar)$">
+Header set Cache-Control "max-age=3600, public"
+</FilesMatch>
+
+# Cache-Control = 1 Minute
+<FilesMatch ".html$">
+Header set Cache-Control "max-age=60, public"
+</FilesMatch>
+
+# Cache-Control = 1 Minute
+<FilesMatch "composite(Artifacts|Content).xml$">
+Header set Cache-Control "max-age=60, public"
+</FilesMatch>
+
+
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f

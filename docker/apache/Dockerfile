@@ -1,6 +1,7 @@
 FROM php:7.2-apache
 
 RUN a2enmod rewrite && \
+	a2enmod headers && \
 # used for php composer
     apt-get update && \
     apt-get install -y git && \
