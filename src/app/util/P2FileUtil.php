@@ -52,7 +52,7 @@ class P2FileUtil
         $pathNames = glob($rootFolder . DIRECTORY_SEPARATOR . '*');
         $directories = array_filter($pathNames, 'is_dir');
         $directories = array_filter($directories, function ($pathName) {
-            return file_exists($pathName . DIRECTORY_SEPARATOR . 'p2.complete');
+            return file_exists($pathName . DIRECTORY_SEPARATOR . 'p2.ready');
         });
             
        $locations = array_map(function ($pathName) {
