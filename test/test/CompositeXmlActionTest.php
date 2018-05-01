@@ -44,7 +44,7 @@ class CompositeXmlActionTest extends TestCase
         	->bodyContains("../features/birt-project-reporting/nightly")
         	->bodyContains("http://download.eclipse.org/eclipse/updates/4.7/")
         	->bodyContains("<?compositeArtifactRepository version='1.0.0'?>")
-        	->bodyContains("<repository name='Axon.ivy nightly repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
+        	->bodyContains("<repository name='Axon.ivy Nightly Build repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
     }
 
     public function test_compositeContent()
