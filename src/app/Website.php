@@ -6,6 +6,7 @@ use Slim\Views\Twig;
 use app\action\CompositeXmlAction;
 use app\action\GlobalIndexAction;
 use app\action\P2IndexAction;
+use app\action\RedirectToP2Action;
 use app\action\VersionIndexAction;
 
 class Website
@@ -46,6 +47,7 @@ class Website
 
     private static function registerRoutes(App $app)
     {
+        $app->get('/', RedirectToP2Action::class);
         $app->get('/p2/', GlobalIndexAction::class);
         $app->get('/p2/{version}/', VersionIndexAction::class);
         $app->get('/p2/{version}/p2.index', P2IndexAction::class);
