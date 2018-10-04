@@ -39,7 +39,7 @@ pipeline {
         }
       }
       steps {
-        sshagent(['3015bfe2-5718-4bd4-9da0-6a5f0169cbfc']) {
+        sshagent(['zugprojenkins-ssh']) {
           script {
           	def targetFile = "website-file-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
             def targetFilename =  targetFile + ".tar"
