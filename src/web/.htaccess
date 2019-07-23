@@ -10,7 +10,7 @@ Header set Cache-Control "max-age=259200, public"
 </FilesMatch>
 
 # Cache-Control = 1 Hour
-<FilesMatch "(artifacts|content)\\.(xml|jar)$">
+<FilesMatch "(artifacts|content)\\.(xml|jar|xml\\.xz)$">
 Header set Cache-Control "max-age=3600, public"
 </FilesMatch>
 
