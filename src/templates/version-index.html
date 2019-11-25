@@ -28,7 +28,6 @@
       </div>
 
       <div class="container">
-        <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-12">
             <h2>Update or Install Axon.ivy features</h2>
@@ -36,9 +35,23 @@
             <p><img src="/resources/images/InstallOrUpdateSoftware.png" class="img-fluid" alt="Responsive image"></p>
           </div>
         </div>
-        <hr>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Contents</h2>
+            <p>This is a composite repository see <a href="compositeArtifacts.xml">compositeArtifacts.xml</a></p>
+            <p>
+            <ul size='{{ composite.locations|length }}'>
+			  	{% for location in composite.locations %}
+			    	<li>{{ location }}</li>
+			    {% endfor %}
+			  </ul>
+            </p>
+          </div>
+        </div>
       </div>
 
+      <hr>
     </main>
 
     <footer class="container">

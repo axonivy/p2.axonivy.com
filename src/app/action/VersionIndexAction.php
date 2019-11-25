@@ -21,13 +21,15 @@ class VersionIndexAction
         $longVersionStr = P2VersionUtil::toLongversionString($version);
         $p2DataPath = $this->container->get('settings')['p2DataPath'];
         $rootFolder = P2FileUtil::getRootFolder($request, $response, $p2DataPath, $version);
+        $composite = P2FileUtil::getFolders($rootFolder);
         $latestVersion = P2FileUtil::getLatestVersion($rootFolder);
         
         return $this->container->get('view')->render($response, 'version-index.html', [
             'version' => $version,
             'longVersionStr' => $longVersionStr,
             'currentUri' => $this->container->get('request')->getUri(),
-            'latestVersion' => $latestVersion
+            'latestVersion' => $latestVersion,
+            'composite' => $composite
         ]);
     }
 }
