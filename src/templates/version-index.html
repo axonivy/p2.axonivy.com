@@ -43,7 +43,7 @@
             <p>
               <ul size='{{ composite.locations|length }}'>
 			  	{% for location in composite.locations %}
-			    	<li>{{ location }}</li>
+			    	<li><a href="{{ location }}/artifacts.xml">{{ location }}</a></li>
 			    	
 			    	    <ul size='{{ artifacts[location]|length }}'>
 					  	{% for artifact in artifacts[location] %}
