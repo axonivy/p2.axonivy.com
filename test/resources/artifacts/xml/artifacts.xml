@@ -5,7 +5,7 @@
     <property name='p2.timestamp' value='1518020687959'/>
     <property name='publishPackFilesAsSiblings' value='true'/>
   </properties>
-  <artifacts size="2">
+  <artifacts size="3">
 	<artifact classifier="osgi.bundle" id="javax.annotation" version="1.2.0.v201602091430">
 		<properties size="5">
 			<property name="download.size" value="29148" />
@@ -24,5 +24,19 @@
 			<property name="download.checksum.sha-256" value="20487ee0da8443d3e327fbd92bded4a67021c01a4990b412f2b6e5c0d1483d5a" />
 		</properties>
 	</artifact>
+	<artifact classifier="binary" id="ch.ivyteam.ivy.designer.feature_root" version="8.0.0.201911250142">
++		<properties size="10">
++			<property name="maven-groupId" value="ch.ivyteam.ivy" />
++			<property name="maven-artifactId" value="ch.ivyteam.ivy.designer.feature" />
++			<property name="maven-version" value="8.0.0-SNAPSHOT" />
++			<property name="maven-classifier" value="root" />
++			<property name="maven-extension" value="zip" />
++			<property name="download.size" value="41927642" />
++			<property name="artifact.size" value="41927642" />
++			<property name="download.md5" value="5ce0c12647e005a234cf9e8eb72bb186" />
++			<property name="download.checksum.md5" value="5ce0c12647e005a234cf9e8eb72bb186" />
++			<property name="download.checksum.sha-256" value="463a9a5586a57610ef9caef547f770b6b864945ba7ea33a1b2c3dc1cb402b110" />
++		</properties>
++	</artifact>
   </artifacts>
 </repository>

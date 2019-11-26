@@ -124,7 +124,10 @@ class P2FileUtil
             return new Plugin((string) $xmlArt['id'], (string) $xmlArt['version']);
         } else if ($classifier === "org.eclipse.update.feature") {
             return new Feature((string) $xmlArt['id'], (string)$xmlArt['version']);
-       }
+        }
+        else if ($classifier === "binary") {
+            return new Binary((string) $xmlArt['id'], (string)$xmlArt['version']);
+        }
     }
 
     
@@ -163,6 +166,9 @@ class Feature extends Artifact
 {
 }
 class Plugin extends Artifact
+{
+}
+class Binary extends Artifact
 {
 }
 

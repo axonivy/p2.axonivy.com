@@ -5,6 +5,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use app\util\P2FileUtil;
 use app\util\Plugin;
+use app\util\Binary;
 
 class P2FileUtilTest extends TestCase
 {
@@ -43,7 +44,8 @@ class P2FileUtilTest extends TestCase
         $artifacts=P2FileUtil::getP2ArtifactsFromXml($artifactsXml);
         Assert::assertEquals(array(
             new Plugin("javax.annotation", "1.2.0.v201602091430"),
-            new Plugin("org.eclipse.ant.launching", "1.2.600.v20190701-1953")
+            new Plugin("org.eclipse.ant.launching", "1.2.600.v20190701-1953"),
+            new Binary("ch.ivyteam.ivy.designer.feature_root", "8.0.0.201911250142")
         ), $artifacts);
     }
 }
