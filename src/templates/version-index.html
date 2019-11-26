@@ -42,29 +42,29 @@
         </div>
         
         <div class="row">
-          <div class="col-md-12">
-            <h2>Contents</h2>
-            <p>This is a composite repository see <a href="compositeArtifacts.xml">compositeArtifacts.xml</a></p>
-            <p>
-              <ul size='{{ composite.locations|length }}'>
-			  	{% for location in composite.locations %}
-			    	<li><a href="{{ location }}/artifacts.xml">{{ location }}</a>
-			    	  <button class="btn btn-primary" type="button" data-toggle="collapse" 
-			    			data-target=".collapse" aria-expanded="true">list 
-					  </button>
-			    	</li>
-			    	    <ul class="collapse" size='{{ artifacts[location]|length }}'>
-					  	{% for artifact in artifacts[location] %}
-					    	<li>{{ artifact.id }} ({{ artifact.version }})</li>
-					    	
-					    {% endfor %}
-					  </ul></div>
-			    	
-			    {% endfor %}
-			  </ul>
-            </p>
-          </div>
-        </div>
+    <div class="col-md-12">
+     <h2>Contents</h2>
+     <p>
+      This is a composite repository see <a
+       href="compositeArtifacts.xml">compositeArtifacts.xml</a>
+     </p>
+     <p>
+     <ul size='{{ composite.locations|length }}'>
+      {% for location in composite.locations %}
+       <li><a href="{{ location }}/artifacts.xml">{{ location }}</a>
+        <button class="btn btn-primary" type="button"
+         data-toggle="collapse" data-target=".collapse"
+         aria-expanded="true">list</button></li>
+       <ul class="collapse" size='{{ artifacts[location]|length }}'>
+        {% for artifact in artifacts[location] %}
+         <li>{{ artifact.id }} ({{ artifact.version }})</li> 
+        {% endfor %}
+       </ul>
+      {% endfor %}
+     </ul>
+     </p>
+    </div>
+   </div>
       </div>
 
       <hr>
