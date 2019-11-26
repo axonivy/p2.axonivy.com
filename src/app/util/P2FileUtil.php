@@ -104,6 +104,35 @@ class P2FileUtil
         $xml = simplexml_load_file($filename);
         return $xml->xpath("/repository/properties/property[@name='p2.timestamp']/@value")[0];
     }
+    
+    public static function getP2ArtifactsFromXml(string $filename): array
+    {
+        $xml = simplexml_load_file($filename);
+        $xmlArtifacts = $xml->xpath("/repository/artifacts/artifact");
+        $artifacts = array();
+        foreach($xmlArtifacts as $xmlArtifact)
+        {
+            array_push($artifacts, self::toArtifact($xmlArtifact));
+        }
+        return $artifacts;
+    }
+
+    private static function toArtifact($xmlArt)
+    {
+        $classifier = (string) $xmlArt['classifier'];
+        if ($classifier === "osgi.bundle") {
+            return new Plugin((string) $xmlArt['id'], (string) $xmlArt['version']);
+        } else if ($classifier === "org.eclipse.update.feature") {
+            return new Feature((string) $xmlArt['id'], (string)$xmlArt['version']);
+       }
+    }
+
+    
+    static function xml_attribute($object, $attribute)
+    {
+        if(isset($object[$attribute]))
+            return (string) $object[$attribute];
+    }
 }
 
 class Composite
@@ -117,3 +146,23 @@ class Composite
         $this->timestamp = $timestamp;
     }
 }
+
+abstract class Artifact
+{
+    public $id;
+    public $version;
+    
+    public function __construct(string $id, string $version)
+    {
+        $this->id = $id;
+        $this->version = $version;
+    }
+}
+
+class Feature extends Artifact
+{
+}
+class Plugin extends Artifact
+{
+}
+

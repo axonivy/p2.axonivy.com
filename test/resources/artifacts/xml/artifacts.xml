@@ -5,4 +5,24 @@
     <property name='p2.timestamp' value='1518020687959'/>
     <property name='publishPackFilesAsSiblings' value='true'/>
   </properties>
+  <artifacts size="2">
+	<artifact classifier="osgi.bundle" id="javax.annotation" version="1.2.0.v201602091430">
+		<properties size="5">
+			<property name="download.size" value="29148" />
+			<property name="artifact.size" value="29148" />
+			<property name="download.md5" value="33919cead78729d63fcaa2c71fdf5ac1" />
+			<property name="download.checksum.md5" value="33919cead78729d63fcaa2c71fdf5ac1" />
+			<property name="download.checksum.sha-256" value="08a9e61914ebd778975bbf16f199fb9fe26c8e637506d54ae8d2d61d930f8656" />
+		</properties>
+	</artifact>
+	<artifact classifier="osgi.bundle" id="org.eclipse.ant.launching" version="1.2.600.v20190701-1953">
+		<properties size="5">
+			<property name="download.size" value="163833" />
+			<property name="artifact.size" value="163833" />
+			<property name="download.md5" value="bb13b873c524ac4e6698af2f163ddd13" />
+			<property name="download.checksum.md5" value="bb13b873c524ac4e6698af2f163ddd13" />
+			<property name="download.checksum.sha-256" value="20487ee0da8443d3e327fbd92bded4a67021c01a4990b412f2b6e5c0d1483d5a" />
+		</properties>
+	</artifact>
+  </artifacts>
 </repository>
