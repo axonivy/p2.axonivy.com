@@ -13,6 +13,10 @@ class P2VersionUtil
             case 'nightly':
                 return 'Nightly Build';
         }
+        if (substr($version, 0, 4) == 'lts-')
+        {
+            return 'Long Term Supported '.substr($version, 4);
+        }
         return $version;
     }
 }
