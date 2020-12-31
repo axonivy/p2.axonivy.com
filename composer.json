@@ -4,7 +4,7 @@
 		"slim/logger" : "~0.1",
 		"slim/twig-view" : "^2.3",
 		"jbzoo/utils": "^2.2",
-		"symfony/process": "^4.0",
+		"symfony/process": "^5.2",
 		"nelexa/zip": "^3.3"
 	},
 	"require-dev" : {
