@@ -1,17 +1,23 @@
 <?php
 namespace app;
 
+use DI\Container;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Factory\AppFactory;
+use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\action\CompositeXmlAction;
 use app\action\GlobalIndexAction;
 use app\action\P2IndexAction;
 use app\action\RedirectToP2Action;
 use app\action\VersionIndexAction;
+use Throwable;
 
 class Website
 {
-
     public static function run()
     {
         $app = self::createApp('../web/p2');
@@ -20,29 +26,30 @@ class Website
 
     public static function createApp(string $p2DataPath): App
     {
-        define('P2_DATA_PATH', $p2DataPath);
-        $config = [
-            'settings' => [
-                'p2DataPath' => $p2DataPath
-            ]
-        ];
-        $app = new App($config);
+        $container = new Container();
+        $container->set('P2_DATA_PATH', $p2DataPath);
+        $app = AppFactory::createFromContainer($container);
         self::registerTwigView($app);
         self::registerRoutes($app);
+        self::installErrorHandling($app);
         return $app;
     }
 
     private static function registerTwigView(App $app)
     {
-        $container = $app->getContainer();
-        // Register component on container
-        $container['view'] = function ($container) {
-            $view = new Twig(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates');
-            // Instantiate and add Slim specific extension
-            $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
-            $view->addExtension(new \Slim\Views\TwigExtension($container['router'], $basePath));
-            return $view;
-        };
+        $app->getContainer()->set(Twig::class, function (ContainerInterface $container) {
+            return Twig::create(__DIR__ . '/../templates');
+        });
+    }
+    
+    private static function installErrorHandling(App $app)
+    {
+        $errorMiddleware = $app->addErrorMiddleware(true, true, true);
+        $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
+            $response = (new Response())->withStatus(404, 'not found');
+            $response->getBody()->write('not found');
+            return $response;
+        });
     }
 
     private static function registerRoutes(App $app)

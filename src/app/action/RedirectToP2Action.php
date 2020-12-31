@@ -1,21 +1,12 @@
 <?php
 namespace app\action;
 
-use Psr\Container\ContainerInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
 
 class RedirectToP2Action
 {
-    private $container;
-
-    public function __construct(ContainerInterface $container)
+    public function __invoke($request, ResponseInterface $response, $args)
     {
-        $this->container = $container;
-    }
-
-    public function __invoke(Request $request, Response $response, $args)
-    {
-        return $response->withRedirect('/p2/', 302);
+        return $response->withHeader('Location', '/p2/')->withStatus(302);
     }
 }

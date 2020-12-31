@@ -8,7 +8,8 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_p2Index()
     {
-        AppTester::assertThatGet('/p2/8.0/p2.index')->statusCode(200)
+        AppTester::assertThatGet('/p2/8.0/p2.index')
+            ->statusCode(200)
             ->contentType('text/plain')
             ->bodyContains('metadata.repository.factory.order=compositeContent.xml,\!');
     }
@@ -60,19 +61,16 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_404()
     {
-        AppTester::assertThatGet('/p2.index')->statusCode(404);
-        AppTester::assertThatGet('/compositeArtifacts.xml')->statusCode(404);
-        AppTester::assertThatGet('/compositeContent.xml')->statusCode(404);
-        AppTester::assertThatGet('//p2.index')->statusCode(404);
-        AppTester::assertThatGet('//compositeArtifacts.xml')->statusCode(404);
-        AppTester::assertThatGet('//compositeContent.xml')->statusCode(404);
+        AppTester::assertThatGet('/p2.index')->notFound();
+        AppTester::assertThatGet('/compositeArtifacts.xml')->notFound();
+        AppTester::assertThatGet('/compositeContent.xml')->notFound();
         
-        AppTester::assertThatGet('/p2/p2.index')->statusCode(404);
-        AppTester::assertThatGet('/p2/compositeArtifacts.xml')->statusCode(404);
-        AppTester::assertThatGet('/p2/compositeContent.xml')->statusCode(404);
+        AppTester::assertThatGet('/p2/p2.index')->notFound();
+        AppTester::assertThatGet('/p2/compositeArtifacts.xml')->notFound();
+        AppTester::assertThatGet('/p2/compositeContent.xml')->notFound();
         
-        AppTester::assertThatGetThrowsNotFoundException('/p2/xyz/p2.index');
-        AppTester::assertThatGetThrowsNotFoundException('/p2/xyz/compositeArtifacts.xml');
-        AppTester::assertThatGetThrowsNotFoundException('/p2/xyz/compositeContent.xml');
+        AppTester::assertThatGet('/p2/xyz/p2.index')->notFound();
+        AppTester::assertThatGet('/p2/xyz/compositeArtifacts.xml')->notFound();
+        AppTester::assertThatGet('/p2/xyz/compositeContent.xml')->notFound();
     }
 }

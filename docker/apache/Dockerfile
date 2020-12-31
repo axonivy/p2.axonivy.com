@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:8.0-apache
 
 RUN a2enmod rewrite && \
 	a2enmod headers && \

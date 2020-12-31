@@ -3,3 +3,4 @@
 composer.phar
 # data should be then a symlink to the real p2-data
 /src/web/p2
+.phpunit.result.cache
