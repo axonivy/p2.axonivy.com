@@ -46,8 +46,9 @@ class Website
     {
         $errorMiddleware = $app->addErrorMiddleware(true, true, true);
         $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
-            $response = new Response();
-            return $response->withStatus(404, 'not found');
+            $response = (new Response())->withStatus(404, 'not found');
+            $response->getBody()->write('not found');
+            return $response;
         });
     }
 
