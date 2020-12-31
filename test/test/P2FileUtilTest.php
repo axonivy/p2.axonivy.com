@@ -11,8 +11,8 @@ class P2FileUtilTest extends TestCase
 {
     public function test_getP2Timestamp_withJar()
     {
-        $artifactsFolder = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'artifacts', 'jar']);
-        $artifactsXml = $artifactsFolder . DIRECTORY_SEPARATOR . 'artifacts.xml';
+        $artifactsFolder = __DIR__ . '/../resources/artifacts/jar';
+        $artifactsXml = $artifactsFolder . '/artifacts.xml';
         try {
             $p2Timestamp=P2FileUtil::getP2Timestamp($artifactsFolder);
             Assert::assertEquals('1518020687959', $p2Timestamp);
@@ -20,8 +20,7 @@ class P2FileUtilTest extends TestCase
             $p2Timestamp = P2FileUtil::getP2TimestampFromXml($artifactsXml);
             Assert::assertEquals('1518020687959', $p2Timestamp);
         } finally {
-            // TODO ???
-            //unlink($artifactsXml);
+            unlink($artifactsXml);
         }
     }
 
