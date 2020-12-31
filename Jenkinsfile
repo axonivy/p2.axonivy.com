@@ -1,62 +1,70 @@
 pipeline {
-  agent {
-    dockerfile {
-      dir 'docker/apache'    
-    }
-  }
+  agent any
+
   triggers {
     cron '@midnight'
   }
+
   options {
     buildDiscarder(logRotator(artifactNumToKeepStr: '10'))
+    skipStagesAfterUnstable()
   }
+
+  environment {
+    DIST_FILE = "website-file.tar"
+  }
+
   stages {
-    stage('distribution') {
+    stage('build') {
+      agent {
+	    dockerfile {
+	      dir 'docker/apache'    
+	    }
+	  }
       steps {
       	sh 'composer install --no-dev --no-progress'
-        sh 'tar -cf website-file.tar src vendor'
-        archiveArtifacts 'website-file.tar'
-      }
-    }
-    
-    stage('test') {
-      steps {
-      	sh 'composer install --no-progress'
+        sh 'tar -cf ${env.DIST_FILE} src vendor'
+        archiveArtifacts env.DIST_FILE
+        stash name: 'website-tar', includes: env.DIST_FILE
+        
+        sh 'composer install --no-progress'
       	sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
-      }
-      post {
-        always {
-          junit 'phpunit-junit.xml' 
-        }
+      	junit 'phpunit-junit.xml'
       }
     }
-    
-     stage('deploy') {
+
+    stage('deploy') {
       when {
         branch 'master'
-        expression {
-          currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-        }
+      }
+      agent {
+      	docker {
+	        image 'axonivy/build-container:ssh-client-1.0'
+	      }
       }
       steps {
         sshagent(['zugprojenkins-ssh']) {
           script {
-          	def targetFile = "website-file-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
-            def targetFilename =  targetFile + ".tar"
+            unstash 'website-tar'
 
-            // copy and unzip
-            sh "scp -o StrictHostKeyChecking=no website-file.tar axonivy1@217.26.54.241:/home/axonivy1/deployment/$targetFilename"
-            sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 mkdir /home/axonivy1/deployment/$targetFile"
-            sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 tar -xf /home/axonivy1/deployment/$targetFilename -C /home/axonivy1/deployment/$targetFile"
-            sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 rm -f /home/axonivy1/deployment/$targetFilename"
-            
-            // create symlinks
-            sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 ln -fns /home/axonivy1/deployment/$targetFile/src/web /home/axonivy1/www/file.axonivy.rocks/linktoweb"
-            sh "ssh -o StrictHostKeyChecking=no axonivy1@217.26.54.241 ln -fns /home/axonivy1/data/p2 /home/axonivy1/deployment/$targetFile/src/web/p2"
+            def targetFolder = "/home/axonivy1/deployment/website-file-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
+            def targetFile =  targetFolder + ".tar"
+            def host = 'axonivy1@217.26.54.241'
+
+            // copy
+            sh "scp ${env.DIST_FILE} $host:$targetFile"
+
+            // untar
+            sh "ssh $host mkdir $targetFolder"
+            sh "ssh $host tar -xf $targetFile -C $targetFolder"
+            sh "ssh $host rm -f $targetFile"
+
+            // symlink
+            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivy1/www/file.axonivy.rocks/linktoweb"
+            sh "ssh $host ln -fns /home/axonivy1/data/p2 $targetFolder/src/web/p2"
           }
         }
       }
     }
-    
   }
 }
