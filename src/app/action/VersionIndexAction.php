@@ -39,7 +39,7 @@ class VersionIndexAction
         return $this->view->render($response, 'version-index.html', [
             'version' => $version,
             'longVersionStr' => $longVersionStr,
-            'currentUri' => $this->container->get('request')->getUri(),
+            'currentUri' => $request->getUri()->__toString(),
             'latestVersion' => $latestVersion,
             'composite' => $composite,
             'artifacts' => $artifactsPerRepo
