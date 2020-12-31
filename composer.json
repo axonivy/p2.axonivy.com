@@ -1,7 +1,6 @@
 {
 	"require" : {
 		"slim/slim" : "^4.7",
-		"slim/logger" : "^0.1.0",
 		"slim/twig-view" : "^3.2",
 		"jbzoo/utils": "^2.2",
 		"symfony/process": "^5.2",
