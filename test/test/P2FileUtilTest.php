@@ -11,16 +11,17 @@ class P2FileUtilTest extends TestCase
 {
     public function test_getP2Timestamp_withJar()
     {
+        $artifactsFolder = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'artifacts', 'jar']);
+        $artifactsXml = $artifactsFolder . DIRECTORY_SEPARATOR . 'artifacts.xml';
         try {
-            $artifactsFolder = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'artifacts', 'jar']);
             $p2Timestamp=P2FileUtil::getP2Timestamp($artifactsFolder);
             Assert::assertEquals('1518020687959', $p2Timestamp);
             
-            $artifactsXml = $artifactsFolder . DIRECTORY_SEPARATOR . 'artifacts.xml';
             $p2Timestamp = P2FileUtil::getP2TimestampFromXml($artifactsXml);
             Assert::assertEquals('1518020687959', $p2Timestamp);
         } finally {
-            unlink($artifactsXml);
+            // TODO ???
+            //unlink($artifactsXml);
         }
     }
 

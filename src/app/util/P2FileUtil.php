@@ -2,8 +2,8 @@
 namespace app\util;
 
 use JBZoo\Utils\Str;
-use PhpZip\ZipFile;
 use Slim\Exception\HttpNotFoundException;
+use Nelexa\Zip\ZipFile;
 
 class P2FileUtil
 {
@@ -94,7 +94,7 @@ class P2FileUtil
     public static function unzip(string $zipFilename, string $extractToFolder)
     {
         $zipFile = new ZipFile();
-        $zipFile->openFile($zipFilename);
+        $zipFile->open($zipFilename);
         $zipFile->extractTo($extractToFolder);
         $zipFile->close();
     }
