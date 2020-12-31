@@ -56,7 +56,7 @@ class AppTester
         $body = $this->response->getBody();
         $body->rewind();
         $content = $body->getContents();
-        Assert::assertContains($expectedToContain, $content);
+        Assert::assertStringContainsString($expectedToContain, $content);
         return $this;
     }
 
