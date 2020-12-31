@@ -64,9 +64,6 @@ class CompositeXmlActionTest extends TestCase
         AppTester::assertThatGet('/p2.index')->notFound();
         AppTester::assertThatGet('/compositeArtifacts.xml')->notFound();
         AppTester::assertThatGet('/compositeContent.xml')->notFound();
-        //AppTester::assertThatGet('//p2.index')->notFound();
-        //AppTester::assertThatGet('//compositeArtifacts.xml')->notFound();
-        //AppTester::assertThatGet('//compositeContent.xml')->notFound();
         
         AppTester::assertThatGet('/p2/p2.index')->notFound();
         AppTester::assertThatGet('/p2/compositeArtifacts.xml')->notFound();
