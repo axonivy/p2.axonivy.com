@@ -1,7 +1,10 @@
 <?php
 namespace app;
 
+use DI\Container;
+use Psr\Container\ContainerInterface;
 use Slim\App;
+use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 use app\action\CompositeXmlAction;
 use app\action\GlobalIndexAction;
@@ -11,7 +14,6 @@ use app\action\VersionIndexAction;
 
 class Website
 {
-
     public static function run()
     {
         $app = self::createApp('../web/p2');
@@ -21,12 +23,8 @@ class Website
     public static function createApp(string $p2DataPath): App
     {
         define('P2_DATA_PATH', $p2DataPath);
-        $config = [
-            'settings' => [
-                'p2DataPath' => $p2DataPath
-            ]
-        ];
-        $app = new App($config);
+        $container = new Container();
+        $app = AppFactory::createFromContainer($container);
         self::registerTwigView($app);
         self::registerRoutes($app);
         return $app;
@@ -34,15 +32,13 @@ class Website
 
     private static function registerTwigView(App $app)
     {
-        $container = $app->getContainer();
-        // Register component on container
-        $container['view'] = function ($container) {
-            $view = new Twig(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates');
+        $app->getContainer()->set(Twig::class, function (ContainerInterface $container) {
+            
             // Instantiate and add Slim specific extension
-            $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
-            $view->addExtension(new \Slim\Views\TwigExtension($container['router'], $basePath));
-            return $view;
-        };
+            //$basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
+            //$view->addExtension(new \Slim\Views\TwigExtension($container['router'], $basePath));
+            return Twig::create(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates');
+        });
     }
 
     private static function registerRoutes(App $app)

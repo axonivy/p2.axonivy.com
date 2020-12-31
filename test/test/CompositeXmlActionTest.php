@@ -8,7 +8,8 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_p2Index()
     {
-        AppTester::assertThatGet('/p2/8.0/p2.index')->statusCode(200)
+        AppTester::assertThatGet('/p2/8.0/p2.index')
+            ->statusCode(200)
             ->contentType('text/plain')
             ->bodyContains('metadata.repository.factory.order=compositeContent.xml,\!');
     }

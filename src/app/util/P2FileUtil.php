@@ -3,7 +3,7 @@ namespace app\util;
 
 use JBZoo\Utils\Str;
 use PhpZip\ZipFile;
-use Slim\Exception\NotFoundException;
+use Slim\Exception\HttpNotFoundException;
 
 class P2FileUtil
 {
@@ -13,10 +13,10 @@ class P2FileUtil
         $rootFolder = $p2DataPath . DIRECTORY_SEPARATOR . $version;
         
         if (! Str::isStart($rootFolder, $p2DataPath)) {
-            throw new NotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
         }
         if (! file_exists($rootFolder)) {
-            throw new NotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
         }
         return $rootFolder;
     }

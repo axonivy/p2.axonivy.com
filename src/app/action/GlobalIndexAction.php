@@ -1,23 +1,20 @@
 <?php
 namespace app\action;
 
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Views\Twig;
 
 class GlobalIndexAction
 {
-    private $container;
-
-    public function __construct(ContainerInterface $container)
+    private $view;
+    
+    public function __construct(Twig $view)
     {
-        $this->container = $container;
+        $this->view = $view;
     }
 
     public function __invoke(Request $request, $response, $args)
     {
-        $p2DataPath = $this->container->get('settings')['p2DataPath'];
-        
-        return $this->container->get('view')
-            ->render($response, 'global-index.html');
+        return $this->view->render($response, 'global-index.html');
     }
 }
