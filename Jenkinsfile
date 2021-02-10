@@ -38,9 +38,9 @@ pipeline {
         branch 'master'
       }
       agent {
-      	docker {
-	        image 'axonivy/build-container:ssh-client-1.0'
-	      }
+        docker {
+          image 'axonivy/build-container:ssh-client-1'
+        }
       }
       steps {
         sshagent(['zugprojenkins-ssh']) {
