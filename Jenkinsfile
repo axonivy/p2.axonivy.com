@@ -6,7 +6,7 @@ pipeline {
   }
 
   options {
-    buildDiscarder(logRotator(artifactNumToKeepStr: '10'))
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '10'))
     skipStagesAfterUnstable()
   }
 
