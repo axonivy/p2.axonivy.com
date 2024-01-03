@@ -11,16 +11,16 @@ pipeline {
   }
 
   environment {
-    DIST_FILE = "website-file.tar"
+    DIST_FILE = "website-p2.tar"
   }
 
   stages {
     stage('build') {
       agent {
-	    dockerfile {
-	      dir 'docker/apache'    
+	      dockerfile {
+	        dir 'docker/apache'    
+	      }
 	    }
-	  }
       steps {
       	sh 'composer install --no-dev --no-progress'
         sh "tar -cf ${env.DIST_FILE} src vendor"
@@ -47,9 +47,9 @@ pipeline {
           script {
             unstash 'website-tar'
 
-            def targetFolder = "/home/axonivy1/deployment/website-file-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
+            def targetFolder = "/home/axonivya/deployment/website-p2-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
             def targetFile =  targetFolder + ".tar"
-            def host = 'axonivy1@217.26.54.241'
+            def host = 'axonivya@217.26.51.247'
 
             // copy
             sh "scp ${env.DIST_FILE} $host:$targetFile"
@@ -60,8 +60,8 @@ pipeline {
             sh "ssh $host rm -f $targetFile"
 
             // symlink
-            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivy1/www/file.axonivy.rocks/linktoweb"
-            sh "ssh $host ln -fns /home/axonivy1/data/p2 $targetFolder/src/web/p2"
+            //sh "ssh $host ln -fns $targetFolder/src/web /home/axonivy1/www/file.axonivy.rocks/linktoweb"
+            //sh "ssh $host ln -fns /home/axonivy1/data/p2 $targetFolder/src/web/p2"
           }
         }
       }
