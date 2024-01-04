@@ -60,7 +60,7 @@ pipeline {
             sh "ssh $host rm -f $targetFile"
 
             // symlink
-            //sh "ssh $host ln -fns $targetFolder/src/web /home/axonivy1/www/file.axonivy.rocks/linktoweb"
+            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/p2.ivyteam.ch/linktoweb"
             //sh "ssh $host ln -fns /home/axonivy1/data/p2 $targetFolder/src/web/p2"
           }
         }
