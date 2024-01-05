@@ -1,7 +1,6 @@
 <?php
 namespace app\util;
 
-use JBZoo\Utils\Str;
 use Slim\Exception\HttpNotFoundException;
 use Nelexa\Zip\ZipFile;
 
@@ -10,12 +9,11 @@ class P2FileUtil
 
     public static function getRootFolder($request, $response, string $p2DataPath, string $version): string
     {
-        $rootFolder = $p2DataPath . DIRECTORY_SEPARATOR . $version;
-        
-        if (! Str::isStart($rootFolder, $p2DataPath)) {
+        $rootFolder = $p2DataPath . DIRECTORY_SEPARATOR . $version;        
+        if (!str_starts_with($rootFolder, $p2DataPath)) {
             throw new HttpNotFoundException($request);
         }
-        if (! file_exists($rootFolder)) {
+        if (!file_exists($rootFolder)) {
             throw new HttpNotFoundException($request);
         }
         return $rootFolder;
@@ -65,8 +63,8 @@ class P2FileUtil
     {
         if ($file = fopen($filePath, "r")) {
             while (! feof($file)) {
-                $line = Str::trim(fgets($file));
-                if (! Str::isStart($line, '#') && ! empty($line)) {
+                $line = trim(fgets($file));
+                if (!str_starts_with($line, '#') && !empty($line)) {
                     array_push($appendTo, $line);
                 }
             }
