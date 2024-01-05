@@ -8,7 +8,7 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_p2Index()
     {
-        AppTester::assertThatGet('/p2/8.0/p2.index')
+        AppTester::assertThatGet('/8.0/p2.index')
             ->statusCode(200)
             ->contentType('text/plain')
             ->bodyContains('metadata.repository.factory.order=compositeContent.xml,\!');
@@ -16,7 +16,7 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_70_compositeArtifacts()
     {
-        AppTester::assertThatGet('/p2/8.0/compositeArtifacts.xml')->statusCode(200)
+        AppTester::assertThatGet('/8.0/compositeArtifacts.xml')->statusCode(200)
             ->contentType('text/xml')
             ->lastModified('Wed, 07 Feb 2018 16:24:47 UTC')
             ->bodyContains('8.0.0-201706120950')
@@ -27,7 +27,7 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_LE_compositeArtifacts()
     {
-        AppTester::assertThatGet('/p2/leading/compositeArtifacts.xml')->statusCode(200)
+        AppTester::assertThatGet('/leading/compositeArtifacts.xml')->statusCode(200)
             ->contentType('text/xml')
             ->lastModified('Wed, 07 Feb 2018 16:24:47 UTC')
             ->bodyContains('7.1.0-201706120950')
@@ -37,7 +37,7 @@ class CompositeXmlActionTest extends TestCase
     
     public function test_nightly_compositeArtifacts_additionalLocations()
     {
-        AppTester::assertThatGet('/p2/nightly/compositeArtifacts.xml')->statusCode(200)
+        AppTester::assertThatGet('/nightly/compositeArtifacts.xml')->statusCode(200)
         	->contentType('text/xml')
         	->lastModified('Sat, 10 Apr 2021 02:11:27 UTC')
         	->bodyContains("'p2.timestamp' value='1618020687959'")
@@ -50,7 +50,7 @@ class CompositeXmlActionTest extends TestCase
 
     public function test_compositeContent()
     {
-        AppTester::assertThatGet('/p2/8.0/compositeContent.xml')->statusCode(200)
+        AppTester::assertThatGet('/8.0/compositeContent.xml')->statusCode(200)
             ->contentType('text/xml')
             ->lastModified('Wed, 07 Feb 2018 16:24:47 UTC')
             ->bodyContains('8.0.0-201706120950')
