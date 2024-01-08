@@ -49,7 +49,7 @@ pipeline {
 
             def targetFolder = "/home/axonivya/deployment/website-p2-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
             def targetFile =  targetFolder + ".tar"
-            def host = 'axonivya@217.26.51.247'
+            def host = 'axonivya@p2.axonivy.com'
 
             // copy
             sh "scp ${env.DIST_FILE} $host:$targetFile"
@@ -61,7 +61,7 @@ pipeline {
 
             // symlink
             sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/p2.ivyteam.ch/linktoweb"
-            //sh "ssh $host ln -fns /home/axonivy1/data/p2 $targetFolder/src/web/p2"
+            sh "ssh $host ln -fns /home/axonivya/data/p2 $targetFolder/src/web/p2"
           }
         }
       }
