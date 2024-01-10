@@ -41,7 +41,7 @@ class Website
             return Twig::create(__DIR__ . '/../templates');
         });
     }
-    
+
     private static function installErrorHandling(App $app)
     {
         $errorMiddleware = $app->addErrorMiddleware(true, true, true);

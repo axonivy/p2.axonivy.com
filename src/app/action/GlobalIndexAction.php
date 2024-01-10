@@ -7,7 +7,7 @@ use Slim\Views\Twig;
 class GlobalIndexAction
 {
     private $view;
-    
+
     public function __construct(Twig $view)
     {
         $this->view = $view;

@@ -26,13 +26,13 @@ class CompositeXmlAction
         $rootFolder = P2FileUtil::getRootFolder($request, $response, $p2DataPath, $version);
         $composite = P2FileUtil::getFolders($rootFolder);
         $fileName = basename($request->getUri()->getPath());
-        
+
         return $this->view->render($response, $fileName, [
             'composite' => $composite,
             'version' => $version,
             'longVersionStr' => $longVersionStr
         ])
             ->withHeader('Content-Type', 'text/xml')
-            ->withHeader('Last-Modified', date ('D, d M Y H:i:s T', $composite->timestamp / 1000));
+            ->withHeader('Last-Modified', date('D, d M Y H:i:s T', $composite->timestamp / 1000));
     }
 }
