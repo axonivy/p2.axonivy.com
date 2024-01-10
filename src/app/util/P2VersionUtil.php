@@ -3,7 +3,7 @@ namespace app\util;
 
 class P2VersionUtil
 {
-    public static function toLongversionString(string $version) : string
+    public static function toLongversionString(string $version): string
     {
         switch ($version) {
             case 'leading':
@@ -13,11 +13,9 @@ class P2VersionUtil
             case 'nightly':
                 return 'Nightly Build';
         }
-        if (substr($version, 0, 4) == 'lts-')
-        {
-            return 'Long Term Supported '.substr($version, 4);
+        if (substr($version, 0, 4) == 'lts-') {
+            return 'Long Term Supported ' . substr($version, 4);
         }
         return $version;
     }
 }
-

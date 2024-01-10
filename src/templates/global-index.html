@@ -1,27 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-rfPl7UHwaHyXh/n5kFubgXzPE1QcgUOk9qyasE7bw4YTXgJ7A5Y/ljxbuNFETD7L" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Neucha|Cabin+Sketch" rel="stylesheet"> 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/sketchy/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rfPl7UHwaHyXh/n5kFubgXzPE1QcgUOk9qyasE7bw4YTXgJ7A5Y/ljxbuNFETD7L"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Neucha|Cabin+Sketch"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
 
-    <link rel="shortcut icon" href="/resources/images/ivy_favicon_48.png">
+    <link rel="shortcut icon" href="/resources/images/ivy_favicon_48.png" />
 
     <title>Axon Ivy Update Sites</title>
   </head>
-  <body style="padding-top: 5.5rem;">
-
-{{ include('includes/navigation.html') }}
+  <body style="padding-top: 5.5rem">
+    {{ include('includes/navigation.html') }}
 
     <main role="main">
-
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-3">Axon Ivy Update Sites</h1>
-          <p>Use one of the following p2 Update Site to update or install additional features to your Axon Ivy Designer.</p>
+          <p>
+            Use one of the following p2 Update Site to update or install
+            additional features to your Axon Ivy Designer.
+          </p>
         </div>
       </div>
 
@@ -29,31 +46,44 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <h2><a href="/p2/lts-8.0/">LTS 8.0</a> <span class="badge badge-success">Stable</span></h2>
+            <h2>
+              <a href="/p2/lts-8.0/">LTS 8.0</a>
+              <span class="badge badge-success">Stable</span>
+            </h2>
             <p>Long Term Support (LTS) version of Axon Ivy</p>
           </div>
           <div class="col-md-4">
-            <h2><a href="/p2/sprint/">Sprint Release</a> <span class="badge badge-warning">Testing</span></h2>
-            <p>We provide previews of the next release after each sprint (every 3 weeks).</p>
+            <h2>
+              <a href="/p2/sprint/">Sprint Release</a>
+              <span class="badge badge-warning">Testing</span>
+            </h2>
+            <p>
+              We provide previews of the next release after each sprint (every 3
+              weeks).
+            </p>
             <div class="alert alert-danger">
-              <strong>Do not use in production!</strong><br /> This release is for testing purposes only.
+              <strong>Do not use in production!</strong><br />
+              This release is for testing purposes only.
             </div>
           </div>
           <div class="col-md-4">
-            <h2><a href="/p2/nightly/">Nightly Build</a> <span class="badge badge-danger">Unstable</span></h2>
+            <h2>
+              <a href="/p2/nightly/">Nightly Build</a>
+              <span class="badge badge-danger">Unstable</span>
+            </h2>
             <p>Every night we build a release which can be highly unstable!</p>
             <div class="alert alert-danger">
-              <strong>Do not use in production!</strong><br /> This build is for testing purposes only.
+              <strong>Do not use in production!</strong><br />
+              This build is for testing purposes only.
             </div>
           </div>
         </div>
-        <hr>
+        <hr />
       </div>
     </main>
 
     <footer class="container">
       <p>&copy; Axon Ivy AG {{ "now"|date("Y") }}</p>
     </footer>
-
   </body>
 </html>

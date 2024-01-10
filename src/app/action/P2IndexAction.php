@@ -23,7 +23,7 @@ class P2IndexAction
         $p2DataPath = $this->container->get('P2_DATA_PATH');
         // i guess this is needed to throw 404
         P2FileUtil::getRootFolder($request, $response, $p2DataPath, $version);
-        
+
         return $this->view
             ->render($response, 'p2.index')
             ->withHeader('Content-Type', 'text/plain');
