@@ -21,12 +21,11 @@ class P2FileUtil
     public static function getFolders($rootFolder): Composite
     {
         $locations = self::getLocations($rootFolder);
-
         $additionalLocationsPath = $rootFolder . '_additional-locations.txt';
         if (file_exists($additionalLocationsPath)) {
             self::appendLines($locations, $additionalLocationsPath);
         }
-
+        usort($locations, fn($a, $b) => version_compare($a, $b));
         $timestamps = array_map(fn ($filename) => self::getP2Timestamp("$rootFolder/$filename"), $locations);
         $timestamp = empty($timestamps) ? 0 : max($timestamps);
         return new Composite($locations, $timestamp);
