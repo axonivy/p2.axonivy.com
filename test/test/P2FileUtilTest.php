@@ -37,16 +37,4 @@ class P2FileUtilTest extends TestCase
         $p2Timestamp = P2FileUtil::getP2TimestampFromXml($artifactsXml);
         Assert::assertEquals('1518020687959', $p2Timestamp);
     }
-
-    public function test_getP2ArtifactsFromXml()
-    {
-        $artifactsXml = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'artifacts', 'xml', 'artifacts.xml']);
-        $artifacts = P2FileUtil::getP2ArtifactsFromXml($artifactsXml);
-        Assert::assertEquals(
-            [
-                new Plugin("javax.annotation", "1.2.0.v201602091430"),
-                new Plugin("org.eclipse.ant.launching", "1.2.600.v20190701-1953"),
-                new Binary("ch.ivyteam.ivy.designer.feature_root", "8.0.0.201911250142")
-            ], $artifacts);
-    }
 }

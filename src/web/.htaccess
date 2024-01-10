@@ -1,4 +1,4 @@
-Options -Indexes
+Options +Indexes
 
 Order allow,deny
 
@@ -29,9 +29,8 @@ Header set Cache-Control "max-age=60, public"
 SetOutputFilter DEFLATE
 </FilesMatch>
 
-
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
-

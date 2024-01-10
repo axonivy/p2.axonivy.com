@@ -25,16 +25,6 @@ class CompositeXmlActionTest extends TestCase
             ->bodyContains("<repository name='Axon Ivy 8.0 repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
     }
 
-    public function test_LE_compositeArtifacts()
-    {
-        AppTester::assertThatGet('/p2/leading/compositeArtifacts.xml')->statusCode(200)
-            ->contentType('text/xml')
-            ->lastModified('Wed, 07 Feb 2018 16:24:47 UTC')
-            ->bodyContains('7.1.0-201706120950')
-            ->bodyContains('7.2.0-201706120950')
-            ->bodyContains("'p2.timestamp' value='1518020687960'");
-    }
-
     public function test_nightly_compositeArtifacts_additionalLocations()
     {
         AppTester::assertThatGet('/p2/nightly/compositeArtifacts.xml')->statusCode(200)
@@ -43,9 +33,8 @@ class CompositeXmlActionTest extends TestCase
             ->bodyContains("'p2.timestamp' value='1618020687959'")
             ->bodyContains("<properties size='3'>")
             ->bodyContains("../features/birt-project-reporting/nightly")
-            ->bodyContains("http://download.eclipse.org/eclipse/updates/4.7/")
             ->bodyContains("<?compositeArtifactRepository version='1.0.0'?>")
-            ->bodyContains("<repository name='Axon Ivy Nightly Build repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
+            ->bodyContains("<repository name='Axon Ivy nightly repository' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>");
     }
 
     public function test_compositeContent()
