@@ -23,7 +23,7 @@ class VersionIndexAction
         $p2DataPath = $this->container->get('P2_DATA_PATH');
         $rootFolder = P2FileUtil::getRootFolder($request, $response, $p2DataPath, $version);
         $composite = P2FileUtil::getFolders($rootFolder);
-        $latestVersion = P2FileUtil::getLatestVersion($rootFolder);
+        $latestVersion = empty($composite->locations) ? 'None' : $composite->locations[0];
         return $this->view->render($response, 'version-index.html', [
             'version' => $version,
             'latestVersion' => $latestVersion,

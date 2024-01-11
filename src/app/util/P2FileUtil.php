@@ -32,18 +32,9 @@ class P2FileUtil
                 $locations[] = "../features/$featureName/$version"; // e.g. ../features/birt-project-reporting/nightly
             }
         }
-
-        usort($locations, fn($a, $b) => version_compare($a, $b));
         $timestamps = array_map(fn ($filename) => self::getP2Timestamp("$rootFolder/$filename"), $locations);
         $timestamp = empty($timestamps) ? 0 : max($timestamps);
         return new Composite($locations, $timestamp);
-    }
-
-    public static function getLatestVersion($rootFolder): string
-    {
-        $locations = self::getLocations($rootFolder);
-        $latestVersion = empty($locations) ? 'None' : max($locations);
-        return $latestVersion;
     }
 
     private static function getLocations($rootFolder): array
@@ -52,6 +43,7 @@ class P2FileUtil
         $directories = array_filter($pathNames, 'is_dir');
         $directories = array_filter($directories, fn ($pathName) => file_exists("$pathName/p2.ready"));        
         $locations = array_map(fn ($pathName) => basename($pathName), $directories);
+        usort($locations, fn($a, $b) => version_compare($b, $a));
         return $locations;
     }
 
