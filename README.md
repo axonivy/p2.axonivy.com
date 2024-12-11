@@ -5,7 +5,7 @@
 	docker compose up
 	docker compose exec web composer install
 	
-Website will run under http://localhost:80
+Website will run under http://localhost:8080
 	
 ## Testing
 
