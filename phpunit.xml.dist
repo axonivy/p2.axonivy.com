@@ -5,6 +5,11 @@
          backupGlobals="false"
          colors="true"
          bootstrap="vendor/autoload.php"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnPhpunitDeprecations="true"
 >
     <php>
         <ini name="error_reporting" value="2" />
@@ -15,10 +20,4 @@
             <directory>test</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./src/</directory>
-        </whitelist>
-    </filter>
 </phpunit>
