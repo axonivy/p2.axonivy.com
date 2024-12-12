@@ -2,7 +2,7 @@
 namespace app\util;
 
 use Slim\Exception\HttpNotFoundException;
-use Nelexa\Zip\ZipFile;
+use PhpZip\ZipFile;
 
 class P2FileUtil
 {
@@ -72,7 +72,7 @@ class P2FileUtil
     public static function unzip(string $zipFilename, string $extractToFolder)
     {
         $zipFile = new ZipFile();
-        $zipFile->open($zipFilename);
+        $zipFile->openFile($zipFilename);
         $zipFile->extractTo($extractToFolder);
         $zipFile->close();
     }
