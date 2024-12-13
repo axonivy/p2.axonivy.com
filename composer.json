@@ -18,5 +18,10 @@
 		"psr-4" : {
 			"test\\" : "test/test"
 		}
-	}
+	},
+	"config": {
+    		"allow-plugins": {
+      			"cyclonedx/cyclonedx-php-composer": true
+    		}
+  	}
 }
