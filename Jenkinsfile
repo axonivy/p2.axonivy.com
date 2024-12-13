@@ -30,6 +30,22 @@ pipeline {
         sh 'composer install --no-progress'
       	sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
       	junit 'phpunit-junit.xml'
+
+	script {
+          if (env.BRANCH_NAME == 'master') {
+            sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
+            sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
+            withCredentials([string(credentialsId: 'dependency-track', variable: 'API_KEY')]) {
+              sh 'curl -v --fail -X POST https://api.dependency-track.ivyteam.io/api/v1/bom \
+                      -H "Content-Type: multipart/form-data" \
+                      -H "X-API-Key: ' + API_KEY + '" \
+                      -F "autoCreate=true" \
+                      -F "projectName=p2.axonivy.com" \
+                      -F "projectVersion=master" \
+                      -F "bom=@bom.json"'
+            }
+          }
+        }
       }
     }
 
