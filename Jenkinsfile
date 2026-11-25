@@ -57,7 +57,7 @@ pipeline {
 
             def targetFolder = "/home/axonivya/deployment/website-p2-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
             def targetFile =  targetFolder + ".tar"
-            def host = 'axonivya@p2.ivyteam.ch'
+            def host = 'axonivya@upload.axonivy.io'
 
             // copy
             sh "scp ${env.DIST_FILE} $host:$targetFile"
